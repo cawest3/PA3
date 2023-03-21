@@ -7,6 +7,20 @@ namespace api.database
 {
     public class CreateSong : ICreateSong
     {
+        public void CreateSongTable(Song mySongs)
+        {
+            ConnectionString myConnection = new ConnectionString();
+            string cs = myConnection.cs;
+
+            using var con = new MySqlConnection(cs);
+            con.Open();
+
+            string stm = @"CREATE TABLE songs(songID INTEGER PRIMARY KEY AUTO_INCREMENT, title TEXT, author TEXT, dateAdded DATE, favorited TEXT, deleted TEXT)";
+
+            using var cmd = new MySqlCommand(stm, con);
+
+            cmd.ExecuteNonQuery();
+        }
         public void AddSong(Song mySongs)
         {
             ConnectionString myConnection = new ConnectionString();
@@ -28,21 +42,7 @@ namespace api.database
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-
-        public void CreateSongTable(Song mySongs)
-        {
-            ConnectionString myConnection = new ConnectionString();
-            string cs = myConnection.cs;
-
-            using var con = new MySqlConnection(cs);
-            con.Open();
-
-            string stm = @"CREATE TABLE songs(songID INTEGER PRIMARY KEY AUTO_INCREMENT, title TEXT, author TEXT, dateAdded DATE, favorited TEXT, deleted TEXT)";
-
-            using var cmd = new MySqlCommand(stm, con);
-
-            cmd.ExecuteNonQuery();
-        }
+        
     }
 }
         

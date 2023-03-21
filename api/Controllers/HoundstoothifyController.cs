@@ -12,18 +12,24 @@ namespace api.Controllers
     [ApiController]
     public class HoundstoothifyController : ControllerBase
     {
+
+        //Create : POST
+        ///Read : GET
+        //Update : PUT
+        //Delete : DELETE
+
         // GET: api/Houndstoothify
         [HttpGet]
         public List<Song> Get()
         {
             List<Song> mySongs = new List<Song>();
             Song song = new Song(){songID = 1, title = "Roar", artist = "KP", dateAdded = "May", favorited = true, deleted = false};
-            // Songs song2 = new Songs(){ID = 1, title = "Roar", artist = "KP", dateAdded = "May", favorited = true, deleted = false};
-            // Songs song3 = new Songs(){ID = 1, title = "Roar", artist = "KP", dateAdded = "May", favorited = true, deleted = false};
+            Song song2 = new Song(){songID = 1, title = "Firework", artist = "KP", dateAdded = "May", favorited = true, deleted = false};
+            Song song3 = new Song(){songID = 1, title = "Last Night", artist = "Morgan Wallen", dateAdded = "May", favorited = true, deleted = false};
        
             mySongs.Add(song);
-            // mySongs.Add(song2);
-            // mySongs.Add(song3);
+            mySongs.Add(song2);
+            mySongs.Add(song3);
             return mySongs;
         }
 
