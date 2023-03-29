@@ -7,7 +7,7 @@ namespace api.database
     public class CreateSong : ICreateSong
     {
 
-        public static void CreateSongTable()
+        public void CreateSongTable(Song song)
         {
             ConnectionString myConnection = new ConnectionString();
             string cs = myConnection.cs;
@@ -21,7 +21,7 @@ namespace api.database
 
             cmd.ExecuteNonQuery();
         }
-        public void AddSong(Song mySongs)
+        public void AddSong(Song song)
         {
             ConnectionString myConnection = new ConnectionString();
             string cs = myConnection.cs;
@@ -32,16 +32,15 @@ namespace api.database
 
             using var cmd = new MySqlCommand(stm, con);
 
-            cmd.Parameters.AddWithValue("@songId", mySongs.songId);
-            cmd.Parameters.AddWithValue("@title", mySongs.title);
-            cmd.Parameters.AddWithValue("@artist", mySongs.artist);
-            cmd.Parameters.AddWithValue("@dateAdded", mySongs.dateAdded);
-            cmd.Parameters.AddWithValue("@favorited", mySongs.favorited);
-            cmd.Parameters.AddWithValue("@deleted", mySongs.deleted);
+            cmd.Parameters.AddWithValue("@songId", song.songId);
+            cmd.Parameters.AddWithValue("@title", song.title);
+            cmd.Parameters.AddWithValue("@artist", song.artist);
+            cmd.Parameters.AddWithValue("@dateAdded", song.dateAdded);
+            cmd.Parameters.AddWithValue("@favorited", song.favorited);
+            cmd.Parameters.AddWithValue("@deleted", song.deleted);
 
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-        
     }
 }

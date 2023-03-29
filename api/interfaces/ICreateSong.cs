@@ -7,7 +7,7 @@ namespace api.interfaces
 {
     public interface ICreateSong
     {
-         public void AddSong(Song mySongs);
-         public void CreateSongTable(Song mySongs);
+         public void AddSong(Song song);
+         public void CreateSongTable(Song song);
     }
 }

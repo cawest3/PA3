@@ -4,10 +4,11 @@ let mySongs = JSON.parse(localStorage.getItem('mySongs'))
 function handleOnLoad(){
     createForm()
     createSongTable()
+
     
 }
 
-function handlePost(song) //Addrow
+function handlePost(song) //Add new song
 {
         console.log("made it to post")
         let tableBody = document.getElementById('songTableBody')
@@ -48,12 +49,14 @@ function handlePost(song) //Addrow
        
 }
 
-function handlePut()
+function handlePut() //In HTML
 {
     console.log("made it to put")
+    FindID(songId, newSongArtist, newSongTitle)
+
 }
 
-function getAllSongs()
+function getAllSongs() //fetches songs
 {
     fetch(url).then(function(response){
         return response.json()
@@ -62,7 +65,7 @@ function getAllSongs()
     })
 }
 
-function createSongTable()
+function createSongTable() //creates table and adds data rows
 {
     //create table
     
@@ -157,9 +160,10 @@ function createSongTable()
     
     app.appendChild(table)
 
+
 }
 
-function createForm()
+function createForm() //Creates Form for submitting
 {
     let form = document.createElement('form')
     let textInput = document.createElement('input')
@@ -203,7 +207,7 @@ function createForm()
     app.appendChild(form)
 }
 
-function SongUpdate(song)
+function SongUpdate(song) // POST Method
 {
     console.log("inside post")
     console.log(song)
@@ -221,7 +225,25 @@ function SongUpdate(song)
     })
 }
 
-function FindID(songId, newSongArtist, newSongTitle)
+function SongEdit(songId) //PUT Method
+{
+    console.log("inside put")
+    console.log(temp)
+    fetch(`${url}/${songId}`, {
+        method: "PUT",
+        headers: {
+            "Accept": "application/json",
+            "Constent-Type": "application/json",
+        },
+        body:JSON.stringify(temp,songId),
+    }).then((response) => {
+        console.log(response)
+    }).catch((error) => {
+        console.log(error)
+    })
+}
+
+function FindID(songId, newSongArtist, newSongTitle) //Find ID to Edit
 {
     console.log("In ID search button")
 
@@ -229,7 +251,7 @@ function FindID(songId, newSongArtist, newSongTitle)
     console.log()
     console.log()
 
-    let temp = songs.find((song) => song.songId == songId)
+    let temp = mySongs.find((song) => song.songId == songId)
     console.log(temp)
 
     temp.title = newSongTitle

@@ -7,7 +7,7 @@ namespace api.interfaces
 {
     public interface IEditSong
     {
-         public void EditASong(Song mySongs);
+        public void EditASong(Song song);
          
     }
 }
