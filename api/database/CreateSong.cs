@@ -1,13 +1,13 @@
 using MySql.Data.MySqlClient;
-using api.database;
-using api.interfaces;
 using api.models;
+using api.interfaces;
 
 namespace api.database
 {
     public class CreateSong : ICreateSong
     {
-        public void CreateSongTable(Song mySongs)
+
+        public static void CreateSongTable()
         {
             ConnectionString myConnection = new ConnectionString();
             string cs = myConnection.cs;
@@ -15,7 +15,7 @@ namespace api.database
             using var con = new MySqlConnection(cs);
             con.Open();
 
-            string stm = @"CREATE TABLE songs(songID INTEGER PRIMARY KEY AUTO_INCREMENT, title TEXT, author TEXT, dateAdded DATE, favorited TEXT, deleted TEXT)";
+            string stm = @"CREATE TABLE songs(songId INTEGER PRIMARY KEY AUTO_INCREMENT, title TEXT, author TEXT, dateAdded DATE,favorited TEXT, deleted TEXT)";
 
             using var cmd = new MySqlCommand(stm, con);
 
@@ -28,11 +28,11 @@ namespace api.database
             using var con = new MySqlConnection(cs);
             con.Open();
 
-            string stm = @"INSERT INTO songs(songID, title, artist) VALUES (@songID, @title, @artist)";
+            string stm = @"INSERT INTO songs(songId, title, artist, dateAdded, favorited, deleted) VALUES(@songId, @title, @artist, @dateAdded, @favorited, @deleted)";
 
             using var cmd = new MySqlCommand(stm, con);
 
-            cmd.Parameters.AddWithValue("@songID", mySongs.songID);
+            cmd.Parameters.AddWithValue("@songId", mySongs.songId);
             cmd.Parameters.AddWithValue("@title", mySongs.title);
             cmd.Parameters.AddWithValue("@artist", mySongs.artist);
             cmd.Parameters.AddWithValue("@dateAdded", mySongs.dateAdded);
@@ -45,4 +45,3 @@ namespace api.database
         
     }
 }
-        
