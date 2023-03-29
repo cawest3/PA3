@@ -13,7 +13,7 @@
     />
     <title>Houndstoothify</title>
 </head>
-<body onload="handleOnLoad()">
+<body>
     <div id="app"></div>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -34,7 +34,7 @@
     <h1>Song Library</h1>
   </div>
     <div>
-        <table class="table" id="songTable">
+        <table onload="handleOnLoad()" class="table" id="songTable">
             <thead>
                 <tr>
                     <th>Title</th>

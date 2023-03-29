@@ -2,15 +2,13 @@ const url = "http://localhost:5286/api/Houndstoothify"
 let mySongs = JSON.parse(localStorage.getItem('mySongs'))  
 
 function handleOnLoad(){
+    getAllSongs()
     createForm()
-    createSongTable()
-
-    
 }
 
-function handlePost(song) //Add new song
-{
-        console.log("made it to post")
+function handlePost(mySongs,song) //Add new song
+{    
+    console.log("made it to post")
         let tableBody = document.getElementById('songTableBody')
         let tr = document.createElement('TR')
         tableBody.appendChild(tr)
